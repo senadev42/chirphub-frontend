@@ -15,6 +15,6 @@ defineProps({
     <button @click="$emit('onClick')"
         class="bg-brand hover:bg-brand-light text-white font-poppins px-6 py-3 rounded-md border-none text-base flex items-center gap-2 cursor-pointer transition duration-200 ease-in-out">
         {{ text }}
-        <img v-if="icon" :src=icon alt="Arrow Icon" class="icon-class" />
+        <img v-if="icon" :src=icon alt="Icon" />
     </button>
 </template>

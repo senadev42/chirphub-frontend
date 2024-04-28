@@ -2,7 +2,11 @@
 
 //Views
 import HeaderBar from '@components/TheHeaderBar.vue'
+import TheSideNavBar from '@components/TheSideNavBar.vue';
 
+import { RouterView, useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
 
 <template>
@@ -10,12 +14,15 @@ import HeaderBar from '@components/TheHeaderBar.vue'
     <!-- Title Bar -->
     <HeaderBar />
 
-    <!-- Sidenav -->
+    <div class="flex flex-row justify-between">
+      <!-- Sidenav -->
+      <TheSideNavBar v-if="route.path !== '/'" />
 
-    <!-- Router -->
-    <main>
-      <RouterView />
-    </main>
+      <!-- Main Content -->
+      <main class="flex-grow mt-16" style="min-height: calc(100vh - 4rem);">
+        <RouterView />
+      </main>
+    </div>
 
   </div>
 </template>
