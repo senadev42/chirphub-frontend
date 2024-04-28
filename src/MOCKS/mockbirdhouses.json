@@ -1,0 +1,36 @@
+{
+    "birdhouses": [
+        {
+            "id": "1",
+            "name": "Blue Macaws",
+            "longitude": "123.456",
+            "latitude": "78.901",
+            "birds": 5,
+            "eggs": 10
+        },
+        {
+            "id": "2",
+            "name": "Toco Toucans",
+            "longitude": "234.567",
+            "latitude": "89.012",
+            "birds": 2,
+            "eggs": 3
+        },
+        {
+            "id": "3",
+            "name": "Golden Conures",
+            "longitude": "345.678",
+            "latitude": "90.123",
+            "birds": 3,
+            "eggs": 10
+        },
+        {
+            "id": "4",
+            "name": "Pigeons",
+            "longitude": "234.567",
+            "latitude": "89.012",
+            "birds": 2,
+            "eggs": 3
+        }
+    ]
+}
