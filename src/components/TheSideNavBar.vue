@@ -17,14 +17,14 @@ const gridIcon = computed(() => route.path === '/birdhouses' ? GridActive : Grid
 </script>
 
 <template>
-    <nav class="min-h-screen fixed top-0 left-0 bg-accent p-4 box-border pt-20">
+    <nav class="min-h-screen fixed top-0 left-0 bg-accent p-4 box-border pt-20 z-10">
         <!-- Home -->
         <RouterLink to="/">
-            <img :src="homeIcon" alt="Birdhouse Admin Panel Home" />
+            <img :src="homeIcon" alt="Birdhouse Admin Panel Home" class=" hover:animate-pulse " />
         </RouterLink>
         <!-- Overview -->
         <RouterLink to="/birdhouses">
-            <img :src="gridIcon" class="mt-2" alt="Birdhouse Admin Panel Overview" />
+            <img :src="gridIcon" alt="Birdhouse Admin Panel Overview" class="mt-3 hover:animate-pulse " />
         </RouterLink>
     </nav>
 </template>
