@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
+//components
 import BirdHouseListCard from "@components/BirdHouseListCard.vue";
-import Pagination from "@components/Pagination.vue"
+import Pagination from "@components/Pagination.vue";
+import Loading from "@components/Loading.vue";
 
-//mocks 
-// [ ] (extract and/or match with server pagination later)
-import mockbirdhouses from "../MOCKS/mockbirdhouses.json";
-const mockbirdhousesref = ref(mockbirdhouses);
+import { useBirdhouseStore } from "../store";
+import Error from "./Error.vue";
+
+//store
+const birdhouseStore = useBirdhouseStore();
+onMounted(async () => {
+    await birdhouseStore.fetchBirdhouses();
+});
 
 //routing
 const router = useRouter();
@@ -16,33 +22,34 @@ function handlecardclick(id: string) {
     router.push(`/birdhouse/${id}`);
 }
 
-
 //pagination
 const currentPage = ref(1);
 const itemsPerPage = ref(5);
 
-
-const paginatedBirdhouses = computed(() => {
+const paginatedBirdhouses = computed<Birdhouse[]>(() => {
     const start = (currentPage.value - 1) * itemsPerPage.value;
     const end = start + itemsPerPage.value;
-    return mockbirdhousesref.value.birdhouses.slice(start, end);
+    return birdhouseStore.birdhouselist.slice(start, end);
 });
-
-
-
-
-
 </script>
 
 <template>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 ml-20">
-        <BirdHouseListCard v-for="birdhouse of paginatedBirdhouses" @onClick="handlecardclick" :key="birdhouse.id"
-            :id="birdhouse.id" :title="birdhouse.name" :location="`(${birdhouse.longitude}, ${birdhouse.latitude})`"
-            :birds="birdhouse.birds" :eggs="birdhouse.eggs" />
+    <div class="ml-20">
+        <Loading v-if="birdhouseStore.loading" />
+
+        <Error v-else-if="birdhouseStore.error !== ''" :errormessage="birdhouseStore.error" />
+
+        <div v-else>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                <BirdHouseListCard v-for="birdhouse of paginatedBirdhouses" @onClick="handlecardclick"
+                    :key="birdhouse.id" :id="birdhouse.id" :title="birdhouse.name"
+                    :location="`(${birdhouse.longitude}, ${birdhouse.latitude})`" :birds="birdhouse.birds"
+                    :eggs="birdhouse.eggs" />
+            </div>
+
+            <!-- pagination -->
+            <Pagination :items="birdhouseStore.birdhouselist" :items-per-page="itemsPerPage" :current-page="currentPage"
+                @update:currentPage="currentPage = $event" />
+        </div>
     </div>
-
-    <!-- pagination -->
-    <Pagination :items="mockbirdhouses.birdhouses" :items-per-page="itemsPerPage" :current-page="currentPage"
-        @update:currentPage="currentPage = $event" />
-
 </template>
