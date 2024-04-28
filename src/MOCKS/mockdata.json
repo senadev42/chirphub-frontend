@@ -320,5 +320,35 @@
             "birds": 3,
             "eggs": 10
         }
-    ]
+    ],
+    "house": {
+        "id": "2",
+        "name": "Toco Toucans",
+        "longitude": "234.567",
+        "latitude": "89.012",
+        "birds": 2,
+        "eggs": 3,
+        "logs": [
+            {
+                "birds": 1,
+                "eggs": 1,
+                "date": "29/04/2024, 09:00"
+            },
+            {
+                "birds": 2,
+                "eggs": 3,
+                "date": "29/04/2024, 09:00"
+            },
+            {
+                "birds": 4,
+                "eggs": 5,
+                "date": "29/04/2024, 09:00"
+            },
+            {
+                "birds": 3,
+                "eggs": 4,
+                "date": "25/04/2024, 09:00"
+            }
+        ]
+    }
 }
