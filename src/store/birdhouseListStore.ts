@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import api_axios from "../api";
 import { reactive } from "vue";
 
-export const useBirdhouseStore = defineStore({
+export const useBirdhouseList = defineStore({
   id: "birdhouselist",
   state: () => ({
     birdhouses: reactive([]),

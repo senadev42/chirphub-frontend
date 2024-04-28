@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 //Views
 import HomePage from "@views/HomePage.vue";
 import BirdhouseListPage from "@views/BirdhouseListPage.vue";
+import BirdhouseSinglePage from "@views/BirdhouseSinglePage.vue";
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     path: "/birdhouses",
     name: "birdhouses-list",
     component: BirdhouseListPage,
+  },
+  {
+    path: "/birdhouse/:id",
+    name: "single-birdhouse-show",
+    component: BirdhouseSinglePage,
   },
 ];
 
