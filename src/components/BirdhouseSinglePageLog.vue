@@ -15,12 +15,12 @@ defineProps({
 
 <template>
     <div
-        class="bg-accent hover:bg-brand rounded-xl cursor-pointer font-poppins flex flex-row items-center gap-x-6 p-6 text-sm">
-        <p class="text-white ">{{ date }}</p>
+        class="bg-accent hover:bg-brand rounded-xl cursor-pointer font-poppins flex flex-row items-center gap-x-6 p-6 py-5 text-sm">
+        <p class="text-white w-24 ">{{ date.split(',')[0] }}</p>
 
-        <div class="flex gap-2 flex-row justify-start items-end">
+        <div class="flex flex-row justify-start items-end">
             <!-- # of Pets -->
-            <span class=" flex text-white text-sm font-medium">
+            <span class="grid grid-cols-2 text-white text-sm font-medium">
                 <span class="mr-2">
                     <img :src=PawIcon alt="Number of birds in birdhouse " />
                 </span>
@@ -28,7 +28,7 @@ defineProps({
             </span>
 
             <!-- # of Eggs -->
-            <span class=" flex text-white text-sm font-medium">
+            <span class="grid grid-cols-2 text-white text-sm font-medium">
                 <span class=" mr-2">
                     <img :src=EggIcon alt="Number of eggs in birdhouse" />
                 </span>

@@ -4,13 +4,11 @@ import { computed, defineProps, defineEmits, defineExpose } from 'vue';
 import Next from "@assets/icons/Pagination/Next.svg";
 import Previous from "@assets/icons/Pagination/Previous.svg";
 
-
 const props = defineProps({
     items: { type: Array, required: true },
     itemsPerPage: { type: Number, required: true },
     currentPage: { type: Number, required: true },
 });
-
 
 //logic
 const totalPages = computed(() =>

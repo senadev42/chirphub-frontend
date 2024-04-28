@@ -25,7 +25,7 @@ export const useBirdhouseSingle = defineStore({
       try {
         this.loading = true;
         //[ ] update with dynamic url later when dropping mock server
-        const response = await api_axios.get("house");
+        const response = await api_axios.get("singlebirdhouse");
         this.singlebirdhouse = response.data;
         console.log(response.data);
       } catch (error) {

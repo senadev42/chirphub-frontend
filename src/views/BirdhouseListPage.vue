@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 //components
-import BirdHouseListCard from "@components/BirdhouseListCard.vue";
+import BirdHouseListCard from "@components/BirdhouseListPageCard.vue";
 import Pagination from "@components/Pagination.vue";
 import Loading from "@components/Loading.vue";
 

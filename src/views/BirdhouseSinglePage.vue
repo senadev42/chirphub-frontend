@@ -5,7 +5,8 @@ import GeoIcon from "@assets/icons/GeoIcon.svg";
 import { useBirdhouseSingle } from "../store";
 import Error from "@components/Error.vue";
 import Pagination from "@components/Pagination.vue";
-import BirdhouseLogCard from '@components/BirdhouseLogCard.vue'
+import BirdhouseLogCard from '@components/BirdhouseSinglePageLog.vue'
+import BirdhouseChart from "@components/BirdhouseSinglePageChart.vue";
 
 //store
 const birdhouse = ref();
@@ -27,7 +28,7 @@ const itemsPerPage = ref(5);
 const paginatedLogs = computed<Log[]>(() => {
     const start = (currentPage.value - 1) * itemsPerPage.value;
     const end = start + itemsPerPage.value;
-    console.log("Logs: ", birdhouseSingleStore.getbirdhouse.logs)
+    console.log("Logs: ", birdhouseSingleStore.getbirdhouse.logs.slice(start, end))
     return birdhouseSingleStore.getbirdhouse.logs.slice(start, end) ?? [];
 });
 
@@ -41,11 +42,11 @@ const paginatedLogs = computed<Log[]>(() => {
         <div v-else-if="birdhouse">
             <div class="bg-accent m-4 px-6 pt-6 rounded-xl font-poppins">
                 <div class="flex flex-row justify-between items-center">
-                    <p class="text-white font-semibold text-2xl mb-4 hyphens-auto">
+                    <p class="text-white font-semibold text-lg md:text-2xl mb-4 hyphens-auto">
                         {{ birdhouse.name }}
                     </p>
 
-                    <span class="flex items-center text-white text-sm font-medium">
+                    <span class="flex items-center text-white text-xs sm:text-sm font-medium">
                         <span class="mr-2">
                             <img :src="GeoIcon" alt="GPS Coordinates of Birdhouse" />
                         </span>
@@ -54,7 +55,7 @@ const paginatedLogs = computed<Log[]>(() => {
                 </div>
 
                 <!-- controls -->
-                <div class="flex flex-row justify-start gap-x-6 text-white">
+                <div class="flex flex-row justify-start gap-x-6 text-white text-sm md:text-base">
                     <p class="cursor-pointer py-2"
                         :class="{ 'border-b-brand text-brand border-b-2 ': viewMode === 'overview' }"
                         @click="viewMode = 'overview'">
@@ -68,16 +69,22 @@ const paginatedLogs = computed<Log[]>(() => {
 
 
             <!-- logs as a list -->
-            <div v-if="paginatedLogs && viewMode == 'overview'">
-                <div class="grid grid-cols-1 gap-4 p-4">
+            <div v-if="paginatedLogs">
+                <div v-if="viewMode == 'overview'" class="grid grid-cols-1 gap-4 p-4">
                     <BirdhouseLogCard v-for="birdhouse of paginatedLogs" :key="birdhouse.id" :id="birdhouse.id"
                         :date="birdhouse.date" :birds="birdhouse.birds" :eggs="birdhouse.eggs" />
                 </div>
+
+                <div v-if="paginatedLogs && viewMode == 'graph'" class="grid grid-cols-1 h-full gap-4 p-4">
+                    <BirdhouseChart :logs="paginatedLogs" />
+                </div>
+
 
                 <!-- pagination -->
                 <Pagination :items="birdhouseSingleStore.getbirdhouse.logs" :items-per-page="itemsPerPage"
                     :current-page="currentPage" @update:currentPage="currentPage = $event" />
             </div>
+
 
 
 
