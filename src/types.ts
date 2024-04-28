@@ -6,3 +6,20 @@ interface Birdhouse {
   birds: number;
   eggs: number;
 }
+
+interface Log {
+  id: string;
+  birds: number;
+  eggs: number;
+  date: string;
+}
+
+interface BirdhouseWithLog extends Birdhouse {
+  logs: Log[];
+}
+
+interface Payload {
+  loading: boolean;
+  loaded: boolean;
+  error: string;
+}

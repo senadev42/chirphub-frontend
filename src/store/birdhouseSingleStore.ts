@@ -3,10 +3,14 @@ import { AxiosError } from "axios";
 import api_axios from "../api";
 import { reactive } from "vue";
 
+interface SingleBirdhousePayload extends Payload {
+  singlebirdhouse: BirdhouseWithLog;
+}
+
 export const useBirdhouseSingle = defineStore({
   id: "birdhousesingle",
-  state: () => ({
-    singlebirdhouse: reactive({}),
+  state: (): SingleBirdhousePayload => ({
+    singlebirdhouse: reactive({}) as BirdhouseWithLog,
     loading: false,
     error: "",
     loaded: false,
