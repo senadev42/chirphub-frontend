@@ -5,10 +5,10 @@ import { useRouter } from "vue-router";
 //components
 import BirdHouseListCard from "@components/BirdhouseListPageCard.vue";
 import Pagination from "@components/Pagination.vue";
-import Loading from "@components/Loading.vue";
+import Loading from "@components/PlaceholderLoading.vue";
 
 import { useBirdhouseList } from "../store";
-import Error from "../components/Error.vue";
+import Error from "../components/PlaceholderError.vue";
 
 //store
 const birdhouseListStore = useBirdhouseList();
@@ -37,6 +37,15 @@ const paginatedBirdhouses = computed<Birdhouse[]>(() => {
     <div class="ml-20 pt-16">
         <Loading v-if="birdhouseListStore.loading" />
         <Error v-else-if="birdhouseListStore.error !== ''" :errormessage="birdhouseListStore.error" />
+
+        <!-- in case of no data -->
+        <div v-else-if="!paginatedBirdhouses || !paginatedBirdhouses.length"
+            class="flex flex-col h-[90vh] justify-center items-center text-white">
+            <div>
+                No birdhouses found.
+            </div>
+        </div>
+
 
         <div v-else-if="paginatedBirdhouses">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import Loading from "@components/Loading.vue";
+import Loading from "@components/PlaceholderLoading.vue";
 import GeoIcon from "@assets/icons/GeoIcon.svg";
 import { useBirdhouseSingle } from "../store";
-import Error from "@components/Error.vue";
+import Error from "@components/PlaceholderError.vue";
 import Pagination from "@components/Pagination.vue";
 import BirdhouseLogCard from '@components/BirdhouseSinglePageLog.vue'
 import BirdhouseChart from "@components/BirdhouseSinglePageChart.vue";
@@ -73,9 +73,17 @@ const paginatedLogs = computed<Log[]>(() => {
                 </div>
             </div>
 
+            <!-- in case of no data -->
+            <div v-if="!paginatedLogs || !paginatedLogs.length"
+                class="flex flex-col h-[70vh] justify-center items-center text-white">
+                <div>
+                    No residency history found.
+                </div>
+            </div>
+
 
             <!-- logs as a list -->
-            <div v-if="paginatedLogs">
+            <div v-else-if="paginatedLogs">
                 <div v-if="viewMode == 'overview'" class="grid grid-cols-1 gap-4 p-4">
                     <BirdhouseLogCard v-for="birdhouse of paginatedLogs" :key="birdhouse.id" :id="String(birdhouse.id)"
                         :createdAt="birdhouse.createdAt" :birds="birdhouse.birds" :eggs="birdhouse.eggs" />
