@@ -16,8 +16,7 @@ defineProps({
 </script>
 
 <template>
-    <div
-        class="bg-accent hover:bg-brand rounded-xl cursor-pointer font-poppins flex flex-row items-center gap-x-6 p-6 py-5 text-sm">
+    <div class="bg-accent rounded-xl cursor-pointer font-poppins flex flex-row items-center gap-x-6 p-6 py-5 text-sm">
         <p class="text-white w-24 ">{{ format(parse(createdAt.split("T")[0], 'yyyy-mm-dd', new Date()), 'dd/mm/yyyy') }}
         </p>
 
