@@ -39,8 +39,7 @@ watchEffect(() => {
 
     data.value = {
         labels: chartlogs.value.map((log) => {
-            const date = parse(log.createdAt.split("T")[0], 'yyyy-mm-dd', new Date());
-            return format(date, 'EEEE');
+            return format(log.createdAt, 'EEEE');
         }).reverse(),
         datasets: [
             {
