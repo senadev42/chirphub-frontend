@@ -8,10 +8,10 @@ interface Birdhouse {
 }
 
 interface Log {
-  id: string;
+  id: number;
   birds: number;
   eggs: number;
-  date: string;
+  createdAt: string;
 }
 
 interface BirdhouseWithLog extends Birdhouse {

@@ -4,9 +4,11 @@
 import PawIcon from '@assets/icons/PawIcon.svg'
 import EggIcon from '@assets/icons/EggIcon.svg'
 
+import { format, parse } from 'date-fns';
+
 defineProps({
     id: { type: String, required: true },
-    date: { type: String, required: true },
+    createdAt: { type: String, required: true },
     birds: { type: Number, required: true },
     eggs: { type: Number, required: true }
 })
@@ -16,7 +18,8 @@ defineProps({
 <template>
     <div
         class="bg-accent hover:bg-brand rounded-xl cursor-pointer font-poppins flex flex-row items-center gap-x-6 p-6 py-5 text-sm">
-        <p class="text-white w-24 ">{{ date.split(',')[0] }}</p>
+        <p class="text-white w-24 ">{{ format(parse(createdAt.split("T")[0], 'yyyy-mm-dd', new Date()), 'dd/mm/yyyy') }}
+        </p>
 
         <div class="flex flex-row justify-start items-end">
             <!-- # of Pets -->

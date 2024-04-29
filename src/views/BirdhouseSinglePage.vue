@@ -7,13 +7,18 @@ import Error from "@components/Error.vue";
 import Pagination from "@components/Pagination.vue";
 import BirdhouseLogCard from '@components/BirdhouseSinglePageLog.vue'
 import BirdhouseChart from "@components/BirdhouseSinglePageChart.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute()
 
 //store
 const birdhouse = ref();
 const birdhouseSingleStore = useBirdhouseSingle();
 onMounted(async () => {
-    await birdhouseSingleStore.fetchSingleBirdhouse();
-    console.log(birdhouseSingleStore.getbirdhouse.logs);
+    const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
+
+    await birdhouseSingleStore.fetchSingleBirdhouse(id);
+
     birdhouse.value = birdhouseSingleStore.getbirdhouse;
 });
 
@@ -28,14 +33,14 @@ const itemsPerPage = ref(5);
 const paginatedLogs = computed<Log[]>(() => {
     const start = (currentPage.value - 1) * itemsPerPage.value;
     const end = start + itemsPerPage.value;
-    console.log("Logs: ", birdhouseSingleStore.getbirdhouse.logs.slice(start, end))
     return birdhouseSingleStore.getbirdhouse.logs.slice(start, end) ?? [];
 });
+
 
 </script>
 
 <template>
-    <div class="ml-20">
+    <div class="ml-20 pt-16 ">
         <Loading v-if="birdhouseSingleStore.loading" />
         <Error v-else-if="birdhouseSingleStore.error !== ''" :errormessage="birdhouseSingleStore.error" />
 
@@ -50,7 +55,8 @@ const paginatedLogs = computed<Log[]>(() => {
                         <span class="mr-2">
                             <img :src="GeoIcon" alt="GPS Coordinates of Birdhouse" />
                         </span>
-                        <span class="text">{{ birdhouse.longitude }}, {{ birdhouse.latitude }}</span>
+                        <span class="text">{{ birdhouse.longitude.toFixed(2) }}, {{ birdhouse.latitude.toFixed(2)
+                            }}</span>
                     </span>
                 </div>
 
@@ -71,8 +77,8 @@ const paginatedLogs = computed<Log[]>(() => {
             <!-- logs as a list -->
             <div v-if="paginatedLogs">
                 <div v-if="viewMode == 'overview'" class="grid grid-cols-1 gap-4 p-4">
-                    <BirdhouseLogCard v-for="birdhouse of paginatedLogs" :key="birdhouse.id" :id="birdhouse.id"
-                        :date="birdhouse.date" :birds="birdhouse.birds" :eggs="birdhouse.eggs" />
+                    <BirdhouseLogCard v-for="birdhouse of paginatedLogs" :key="birdhouse.id" :id="String(birdhouse.id)"
+                        :createdAt="birdhouse.createdAt" :birds="birdhouse.birds" :eggs="birdhouse.eggs" />
                 </div>
 
                 <div v-if="paginatedLogs && viewMode == 'graph'" class="grid grid-cols-1 h-full gap-4 p-4">

@@ -21,13 +21,12 @@ export const useBirdhouseSingle = defineStore({
     },
   },
   actions: {
-    async fetchSingleBirdhouse() {
+    async fetchSingleBirdhouse(id: string) {
       try {
         this.loading = true;
         //[ ] update with dynamic url later when dropping mock server
-        const response = await api_axios.get("singlebirdhouse");
+        const response = await api_axios.get(`/house/${id}/residency`);
         this.singlebirdhouse = response.data;
-        console.log(response.data);
       } catch (error) {
         // console.error(error.message);
         if (error instanceof AxiosError) this.error = error.message;
