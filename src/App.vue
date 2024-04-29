@@ -19,7 +19,7 @@ const route = useRoute()
       <TheSideNavBar v-if="route.path !== '/'" />
 
       <!-- Main Content -->
-      <main class="flex-grow mt-16" style="min-height: calc(100vh - 4rem);">
+      <main class="flex-grow" style="min-height: calc(100vh - 4rem);">
         <RouterView />
       </main>
     </div>

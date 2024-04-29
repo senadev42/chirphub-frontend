@@ -34,7 +34,7 @@ const paginatedBirdhouses = computed<Birdhouse[]>(() => {
 </script>
 
 <template>
-    <div class="ml-20">
+    <div class="ml-20 pt-16">
         <Loading v-if="birdhouseListStore.loading" />
         <Error v-else-if="birdhouseListStore.error !== ''" :errormessage="birdhouseListStore.error" />
 

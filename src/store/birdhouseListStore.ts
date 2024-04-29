@@ -22,7 +22,6 @@ export const useBirdhouseList = defineStore({
         this.loading = true;
         const response = await api_axios.get("house");
         this.birdhouses = response.data;
-        console.log(response.data);
       } catch (error) {
         // console.error(error.message);
         if (error instanceof AxiosError) this.error = error.message;
