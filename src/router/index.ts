@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@views/HomePage.vue";
 import BirdhouseListPage from "@views/BirdhouseListPage.vue";
 import BirdhouseSinglePage from "@views/BirdhouseSinglePage.vue";
+import NotFound from "@components/NotFound.vue";
 
 const routes = [
   {
@@ -20,6 +21,17 @@ const routes = [
     path: "/birdhouse/:id",
     name: "single-birdhouse-show",
     component: BirdhouseSinglePage,
+  },
+  {
+    path: "/404",
+    name: "page-not-found",
+    component: NotFound,
+  },
+  {
+    path: "/:path*",
+    redirect() {
+      return { path: "/404", replace: true };
+    },
   },
 ];
 
