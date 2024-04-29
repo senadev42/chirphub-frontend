@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { computed, defineProps, defineEmits, defineExpose } from 'vue';
+import { computed } from 'vue';
 import Next from "@assets/icons/Pagination/Next.svg";
 import Previous from "@assets/icons/Pagination/Previous.svg";
 

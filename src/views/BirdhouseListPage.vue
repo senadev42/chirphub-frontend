@@ -42,8 +42,8 @@ const paginatedBirdhouses = computed<Birdhouse[]>(() => {
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                 <BirdHouseListCard v-for="birdhouse of paginatedBirdhouses" @onClick="handlecardclick"
                     :key="birdhouse.id" :id="birdhouse.id" :title="birdhouse.name"
-                    :location="`(${birdhouse.longitude}, ${birdhouse.latitude})`" :birds="birdhouse.birds"
-                    :eggs="birdhouse.eggs" />
+                    :location="`(${birdhouse.longitude.toFixed(2)}, ${birdhouse.latitude.toFixed(2)})`"
+                    :birds="birdhouse.birds" :eggs="birdhouse.eggs" />
             </div>
 
             <!-- pagination -->
