@@ -55,8 +55,8 @@ const paginatedLogs = computed<Log[]>(() => {
                         <span class="mr-2">
                             <img :src="GeoIcon" alt="GPS Coordinates of Birdhouse" />
                         </span>
-                        <span class="text">{{ birdhouse.longitude.toFixed(2) }}, {{ birdhouse.latitude.toFixed(2)
-                            }}</span>
+                        <span class="text">({{ birdhouse.longitude.toFixed(2) }}, {{ birdhouse.latitude.toFixed(2)
+                            }})</span>
                     </span>
                 </div>
 

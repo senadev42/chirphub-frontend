@@ -41,11 +41,11 @@ watchEffect(() => {
         labels: chartlogs.value.map((log) => {
             const date = parse(log.createdAt.split("T")[0], 'yyyy-mm-dd', new Date());
             return format(date, 'EEEE');
-        }),
+        }).reverse(),
         datasets: [
             {
                 label: "Birds",
-                data: chartlogs.value.map((log) => log.birds),
+                data: chartlogs.value.map((log) => log.birds).reverse(),
                 borderColor: "rgba(116, 79, 153, 0.8)",
                 tension: 0.3,
                 fill: 'start',
@@ -53,7 +53,7 @@ watchEffect(() => {
             },
             {
                 label: "Eggs",
-                data: chartlogs.value.map((log) => log.eggs),
+                data: chartlogs.value.map((log) => log.eggs).reverse(),
                 borderColor: "rgb(80, 81, 249, 0.8)",
                 tension: 0.3,
                 fill: "start",
